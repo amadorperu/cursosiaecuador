@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rocket · Cursos de inteligencia artificial en Quito</title>
+<meta name="description" content="Rocket dicta cursos prácticos de inteligencia artificial en Quito, Ecuador, para profesionales, equipos y empresas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F5FA; --surface:#FFFFFF; --ink:#16224A; --muted:#4E5878;
+  --cobalt:#2E4FD8; --flame:#F59E2B; --paramo:#3F7D5A; --line:#D5DBEA;
+  --hero-bg:#16224A; --hero-ink:#F3F5FA; --hero-muted:#AEB8D8;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1630; --surface:#18213F; --ink:#E9EDF8; --muted:#A3ADCC;
+    --cobalt:#7F9BFF; --flame:#FFB14E; --paramo:#7CC39B; --line:#2A3560;
+    --hero-bg:#0A1024; --hero-ink:#F3F5FA; --hero-muted:#9AA6CC;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1630; --surface:#18213F; --ink:#E9EDF8; --muted:#A3ADCC;
+  --cobalt:#7F9BFF; --flame:#FFB14E; --paramo:#7CC39B; --line:#2A3560;
+  --hero-bg:#0A1024; --hero-ink:#F3F5FA; --hero-muted:#9AA6CC;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:1.0625rem;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--hero-bg)}
+h1,h2,h3{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;line-height:1.05;margin:0}
+a{color:inherit}
+img,svg{max-width:100%}
+:focus-visible{outline:3px solid var(--flame);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+
+/* Barra superior */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--hero-bg);color:var(--hero-ink)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:64px}
+.logo{display:flex;align-items:center;gap:.55rem;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.35rem;text-decoration:none;letter-spacing:-.02em}
+.logo svg{width:26px;height:26px}
+.top nav{display:flex;gap:1.4rem;align-items:center}
+.top nav a{text-decoration:none;color:var(--hero-muted);font-size:.95rem}
+.top nav a:hover{color:var(--hero-ink)}
+.btn{display:inline-block;background:var(--flame);color:#16224A;font-weight:700;text-decoration:none;
+  padding:.75rem 1.25rem;border-radius:999px;border:0;font:inherit;font-weight:700;cursor:pointer}
+.btn:hover{filter:brightness(1.06)}
+.top .btn{padding:.5rem 1rem;font-size:.95rem}
+@media (max-width:760px){.top nav a:not(.btn){display:none}}
+
+/* Hero */
+.hero{background:var(--hero-bg);color:var(--hero-ink);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:2rem;align-items:center;padding-block:4rem 0}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5.2rem);font-weight:800;letter-spacing:-.035em}
+.hero p.lead{color:var(--hero-muted);font-size:1.2rem;max-width:34ch;margin:1.4rem 0 2rem}
+.hero .actions{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.ghost{color:var(--hero-ink);text-decoration:none;padding:.75rem 1.1rem;border:1.5px solid #3A4A86;border-radius:999px;font-weight:700}
+.ghost:hover{border-color:var(--hero-ink)}
+.chart{position:relative;align-self:end}
+.chart svg{display:block;width:100%;height:auto}
+.chart text{font-family:"Atkinson Hyperlegible",sans-serif;fill:var(--hero-muted);font-size:13px}
+.chart .big{font-family:"Bricolage Grotesque",sans-serif;fill:var(--hero-ink);font-size:20px;font-weight:600}
+.hero .facts{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:2.5rem;padding:1.6rem 0 2.2rem;border-top:1px solid #2A3A76;margin-top:1rem;color:var(--hero-muted);font-size:.98rem}
+.hero .facts strong{color:var(--hero-ink);display:block;font-size:1.05rem}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;padding-top:3rem}
+  .chart{max-width:520px}
+}
+
+/* Secciones */
+section{padding-block:5rem}
+.sec-head{max-width:46rem;margin-bottom:2.6rem}
+.sec-head h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em}
+.sec-head p{color:var(--muted);margin:.9rem 0 0;font-size:1.12rem}
+
+/* Ruta de cursos */
+.route{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:3px solid var(--ink)}
+.stage{padding:1.8rem 1.6rem 2rem 0;position:relative}
+.stage + .stage{padding-left:1.6rem;border-left:1px solid var(--line)}
+.stage .alt{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;color:var(--cobalt);font-size:.98rem}
+.stage h3{font-size:1.75rem;font-weight:800;letter-spacing:-.02em;margin:.4rem 0 .2rem}
+.stage .for{color:var(--muted);margin:0 0 1rem}
+.stage ul{margin:0 0 1.4rem;padding-left:1.1rem}
+.stage li{margin:.3rem 0}
+.stage .meta{display:flex;flex-wrap:wrap;gap:.5rem}
+.tag{font-size:.88rem;padding:.25rem .65rem;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+@media (max-width:860px){
+  .route{grid-template-columns:1fr}
+  .stage,.stage + .stage{padding:1.8rem 0;border-left:0;border-bottom:1px solid var(--line)}
+}
+
+/* Método */
+.method{background:var(--surface);border-block:1px solid var(--line)}
+.method .grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem 4rem}
+.method h3{font-size:1.3rem;font-weight:600;margin-bottom:.4rem}
+.method p{margin:0;color:var(--muted);max-width:42ch}
+@media (max-width:760px){.method .grid{grid-template-columns:1fr;gap:2rem}}
+
+/* Empresas */
+.biz{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start}
+.biz .box{background:var(--hero-bg);color:var(--hero-ink);border-radius:18px;padding:2rem}
+.biz .box h3{font-size:1.5rem;font-weight:800;margin-bottom:.8rem}
+.biz .box p{color:var(--hero-muted);margin:0 0 1.4rem}
+.biz ul{margin:0;padding-left:1.1rem}
+.biz li{margin:.45rem 0}
+@media (max-width:860px){.biz{grid-template-columns:1fr}}
+
+/* Preguntas */
+.faq details{border-top:1px solid var(--line);padding:1.1rem 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:1.2rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--cobalt);font-weight:800}
+.faq details[open] summary::after{content:"−"}
+.faq details p{color:var(--muted);margin:.7rem 0 0;max-width:62ch}
+
+/* Contacto */
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+form{display:grid;gap:1rem;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.8rem}
+label{display:grid;gap:.35rem;font-weight:700;font-size:.95rem}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:.7rem .8rem;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--cobalt);outline:none}
+.form-note{font-size:.9rem;color:var(--muted);margin:0}
+.form-error{color:#C0392B;font-weight:700;font-size:.92rem;margin:0;min-height:1.2em}
+.contact .info p{color:var(--muted);margin:.4rem 0 1.4rem}
+.contact .info a{color:var(--cobalt);font-weight:700}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+
+footer{background:var(--hero-bg);color:var(--hero-muted);padding:2rem 0;font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .rocket-anim{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Rocket, inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2c5 4 7 9 7 15l-3 5h-8l-3-5c0-6 2-11 7-15z" fill="#F3F5FA"/><circle cx="16" cy="13" r="3" fill="#2E4FD8"/><path d="M12 22l4 8 4-8z" fill="#F59E2B"/></svg>
+      Rocket
+    </a>
+    <nav aria-label="Principal">
+      <a href="#cursos">Cursos</a>
+      <a href="#metodo">Cómo enseñamos</a>
+      <a href="#empresas">Empresas</a>
+      <a href="#preguntas">Preguntas</a>
+      <a class="btn" href="#contacto">Inscríbete</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero" style="padding-block:0">
+    <div class="wrap">
+      <div>
+        <h1>Aprende inteligencia artificial en Quito y úsala desde la primera clase.</h1>
+        <p class="lead">Cursos presenciales y en vivo para profesionales y equipos que quieren trabajar mejor con IA. Grupos pequeños, casos reales de Ecuador y un proyecto propio al terminar.</p>
+        <div class="actions">
+          <a class="btn" href="#cursos">Ver cursos</a>
+          <a class="ghost" href="#contacto">Hablar con un asesor</a>
+        </div>
+      </div>
+
+      <div class="chart" aria-hidden="true">
+        <svg viewBox="0 0 520 380">
+          <defs>
+            <linearGradient id="mtn" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2E4FD8" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#2E4FD8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Órbita -->
+          <ellipse cx="300" cy="80" rx="210" ry="38" fill="none" stroke="#3A4A86" stroke-dasharray="4 7"/>
+          <text x="420" y="40">Órbita</text>
+          <!-- Pichincha -->
+          <path d="M0 380 L0 300 C60 290 90 250 130 205 C150 185 165 182 180 196 C215 232 250 268 310 280 C380 292 450 300 520 304 L520 380 Z" fill="url(#mtn)"/>
+          <path d="M0 300 C60 290 90 250 130 205 C150 185 165 182 180 196 C215 232 250 268 310 280 C380 292 450 300 520 304" fill="none" stroke="#7F9BFF" stroke-width="1.5"/>
+          <!-- Línea ecuatorial -->
+          <line x1="0" y1="340" x2="520" y2="340" stroke="#F59E2B" stroke-width="1.5" stroke-dasharray="2 5"/>
+          <text x="12" y="362">Latitud 0°</text>
+          <!-- Trayectoria -->
+          <path id="tray" d="M150 300 C170 230 200 160 250 118 C285 90 320 78 360 72" fill="none" stroke="#F59E2B" stroke-width="2.5"/>
+          <circle cx="150" cy="300" r="6" fill="#F59E2B"/>
+          <text class="big" x="64" y="268">Quito</text>
+          <text x="64" y="288">2.850 m sobre el mar</text>
+          <!-- Cohete -->
+          <g class="rocket-anim">
+            <g>
+              <path d="M0 -14 C6 -9 7 -2 7 5 L4 10 H-4 L-7 5 C-7 -2 -6 -9 0 -14 Z" fill="#F3F5FA"/>
+              <circle cx="0" cy="-3" r="2.6" fill="#2E4FD8"/>
+              <path d="M-3 10 L0 18 L3 10 Z" fill="#F59E2B"/>
+              <animateMotion dur="3.2s" fill="freeze" rotate="auto" begin="0.3s" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".4 0 .2 1">
+                <mpath href="#tray"/>
+              </animateMotion>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="facts">
+        <div><strong>Presencial en Quito</strong>Aulas equipadas en el norte de la ciudad</div>
+        <div><strong>En vivo por Zoom</strong>Para todo Ecuador</div>
+        <div><strong>Máximo 20 personas</strong>Por grupo</div>
+        <div><strong>Certificado Rocket</strong>Con proyecto final evaluado</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cursos">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Tres cursos, una ruta de ascenso</h2>
+        <p>Empieza en el nivel que corresponde a tu experiencia. Cada curso funciona solo y también prepara el siguiente.</p>
+      </div>
+
+      <div class="route">
+        <article class="stage">
+          <div class="alt">Nivel 1 · Despegue</div>
+          <h3>IA para tu trabajo diario</h3>
+          <p class="for">Para quien empieza con ChatGPT, Claude o Gemini.</p>
+          <ul>
+            <li>Escribir instrucciones que dan buenos resultados</li>
+            <li>Redactar, resumir y analizar documentos</li>
+            <li>Crear presentaciones, imágenes y hojas de cálculo con IA</li>
+            <li>Uso responsable y cuidado de datos</li>
+          </ul>
+          <div class="meta"><span class="tag">16 horas</span><span class="tag">4 sesiones</span><span class="tag">Sin requisitos</span></div>
+        </article>
+
+        <article class="stage">
+          <div class="alt">Nivel 2 · Órbita</div>
+          <h3>Automatización y agentes</h3>
+          <p class="for">Para quien ya usa IA y quiere ahorrar horas cada semana.</p>
+          <ul>
+            <li>Flujos automáticos con n8n y Make</li>
+            <li>Asistentes conectados a correo, calendario y hojas</li>
+            <li>Agentes que consultan tus documentos</li>
+            <li>Aplicaciones sencillas creadas con IA</li>
+          </ul>
+          <div class="meta"><span class="tag">24 horas</span><span class="tag">6 sesiones</span><span class="tag">Nivel 1 o experiencia</span></div>
+        </article>
+
+        <article class="stage">
+          <div class="alt">Nivel 3 · Misión</div>
+          <h3>IA para líderes</h3>
+          <p class="for">Para gerentes y jefes que deciden cómo adopta IA su equipo.</p>
+          <ul>
+            <li>Identificar procesos con mayor retorno</li>
+            <li>Diseñar un piloto y medir resultados</li>
+            <li>Políticas de uso y gestión del riesgo</li>
+            <li>Plan de adopción para tu área</li>
+          </ul>
+          <div class="meta"><span class="tag">16 horas</span><span class="tag">4 sesiones</span><span class="tag">Cargos de dirección</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="metodo" class="method">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Cómo enseñamos</h2>
+        <p>Cada sesión termina con algo que usas al día siguiente en tu trabajo.</p>
+      </div>
+      <div class="grid">
+        <div><h3>Práctica en cada clase</h3><p>Llegas con tu laptop y trabajas sobre tareas reales: informes, correos, propuestas y bases de datos.</p></div>
+        <div><h3>Casos de empresas ecuatorianas</h3><p>Ejemplos de comercio, banca, salud, educación y sector público adaptados a la realidad local.</p></div>
+        <div><h3>Proyecto final propio</h3><p>Cierras el curso con una solución aplicada a tu puesto, revisada por el docente.</p></div>
+        <div><h3>Acompañamiento posterior</h3><p>Un mes de grupo de consultas y acceso a las grabaciones y materiales.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="empresas">
+    <div class="wrap biz">
+      <div>
+        <div class="sec-head" style="margin-bottom:1.6rem">
+          <h2>Programas para empresas</h2>
+          <p>Diseñamos la capacitación según las áreas, herramientas y objetivos de tu organización.</p>
+        </div>
+        <ul>
+          <li>Diagnóstico inicial del nivel de IA del equipo</li>
+          <li>Contenidos con los procesos y datos de tu empresa</li>
+          <li>Sesiones en tus instalaciones o en nuestras aulas de Quito</li>
+          <li>Informe final con avances y siguientes pasos</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Cotiza un programa in company</h3>
+        <p>Cuéntanos cuántas personas participan y qué áreas quieres capacitar. Respondemos en un día hábil.</p>
+        <a class="btn" href="#contacto" data-interes="Programa para empresas">Solicitar propuesta</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas" class="faq">
+    <div class="wrap">
+      <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
+      <details><summary>¿Necesito saber programar?</summary><p>No. Los niveles 1 y 3 no usan código. En el nivel 2 armamos automatizaciones con herramientas visuales.</p></details>
+      <details><summary>¿Dónde son las clases presenciales?</summary><p>En nuestras aulas del norte de Quito. Te enviamos la dirección exacta al confirmar tu inscripción.</p></details>
+      <details><summary>¿Qué necesito llevar?</summary><p>Una laptop con conexión a internet y una cuenta de correo de Google o Microsoft.</p></details>
+      <details><summary>¿Qué formas de pago aceptan?</summary><p>Transferencia bancaria, tarjeta de crédito y débito. Las empresas pueden pagar con factura.</p></details>
+      <details><summary>¿Recibo certificado?</summary><p>Sí. Recibes el certificado Rocket al asistir al 80 % de las sesiones y aprobar el proyecto final.</p></details>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <div class="wrap">
+      <div class="info">
+        <div class="sec-head" style="margin-bottom:1rem">
+          <h2>Reserva tu cupo</h2>
+          <p>Completa el formulario y te escribimos por WhatsApp con fechas, horarios y precio del próximo grupo.</p>
+        </div>
+        <p><strong>WhatsApp</strong><br><a href="https://wa.me/593900000000" target="_blank" rel="noopener">+593 90 000 0000</a></p>
+        <p><strong>Correo</strong><br><a href="mailto:hola@rocket.ec">hola@rocket.ec</a></p>
+        <p><strong>Ubicación</strong><br>Quito, Ecuador</p>
+      </div>
+
+      <form id="form" novalidate>
+        <label>Nombre completo<input id="f-nombre" name="nombre" autocomplete="name" required></label>
+        <label>Celular<input id="f-cel" name="celular" type="tel" autocomplete="tel" placeholder="09 1234 5678" required></label>
+        <label>Curso de interés
+          <select id="f-curso" name="curso">
+            <option>IA para tu trabajo diario</option>
+            <option>Automatización y agentes</option>
+            <option>IA para líderes</option>
+            <option>Programa para empresas</option>
+          </select>
+        </label>
+        <label>Modalidad
+          <select id="f-mod" name="modalidad">
+            <option>Presencial en Quito</option>
+            <option>En vivo por Zoom</option>
+          </select>
+        </label>
+        <label>Mensaje (opcional)<textarea id="f-msg" name="mensaje" rows="3"></textarea></label>
+        <p class="form-error" id="f-error" role="alert"></p>
+        <button class="btn" type="submit">Enviar por WhatsApp</button>
+        <p class="form-note">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Rocket. Cursos de inteligencia artificial en Quito, Ecuador.</span>
+    <span><a href="#inicio">Volver arriba</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var WHATSAPP = "593900000000"; // Reemplaza con el número real
+  var form = document.getElementById("form");
+  var err = document.getElementById("f-error");
+  var curso = document.getElementById("f-curso");
+
+  document.querySelectorAll("[data-interes]").forEach(function(a){
+    a.addEventListener("click", function(){ curso.value = a.getAttribute("data-interes"); });
+  });
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var nombre = document.getElementById("f-nombre").value.trim();
+    var cel = document.getElementById("f-cel").value.trim();
+    if(!nombre){ err.textContent = "Escribe tu nombre para continuar."; return; }
+    if(cel.replace(/\D/g,"").length < 9){ err.textContent = "Escribe un celular válido de 9 o 10 dígitos."; return; }
+    err.textContent = "";
+    var texto = "Hola Rocket, soy " + nombre + " (" + cel + "). Me interesa el curso “" + curso.value +
+      "” en modalidad " + document.getElementById("f-mod").value + ".";
+    var msg = document.getElementById("f-msg").value.trim();
+    if(msg){ texto += " " + msg; }
+    window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(texto), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>
